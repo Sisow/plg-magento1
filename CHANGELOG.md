@@ -1,3 +1,3 @@
-# Changelog
-## [5.5.2] - 2020-07-21
+## Changelog
+5.5.2
 - Fix: Tax total (fee) on invoice+pdf and credit memo.
