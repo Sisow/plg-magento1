@@ -1,0 +1,27 @@
+<?php
+$_code = $this->getMethodCode(); 
+$_paymentfee = $this->getFee();
+$_description = $this->getInstructions();
+
+?>
+<ul class="form-list" id="payment_form_<?php echo $_code ?>" style="display:none">
+	<li class="form-alt">
+		<?php
+			if($_paymentfee['incl'] > 0)
+			{
+				echo '<br/><br/><b>'. $this->__(Mage::getStoreConfig('payment/'.$_code.'/payment_fee_label')) .' ' . Mage::app()->getStore()->convertPrice($_paymentfee['incl'], true, true).'</b>';
+			}
+		?>
+		<a href="http://www.sisow.nl" target="_blank"><img src="https://www.sisow.nl/Sisow/images/mail/sisowklein.jpg" alt="Sisow OverBoeking" /></a><br/>
+		<?php echo $this->__('You have chosen to pay in advance by bank transfer.'); ?><br/>
+			<?php echo $this->__('The processing is outsourced to Sisow B.V.'); ?><br/>
+			<br/>
+			<?php echo $this->__('You will receive an e-mail with information on how to complete your payment.'); ?>
+			<?php 
+				if(!empty($_description))
+				{
+					echo '<p>' . $_description . '</p>';
+				}
+			?>
+	</li>
+</ul>

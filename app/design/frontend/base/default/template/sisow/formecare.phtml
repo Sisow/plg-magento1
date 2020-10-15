@@ -1,0 +1,89 @@
+<?php 
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   design_default
+ * @package    Mage
+ * @copyright  Copyright (c) 2008 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+$fee = $this->getFee();
+$firstletter = $this->getFirstname();
+
+?>
+
+	<ul class="form-list" id="payment_form_sisowecare" style="display:none">
+		<li class="form-alt">
+			<img src="https://www.sisow.nl/Sisow/images/ideal/logo_ecare_small.gif" alt="Sisow ecare" /><br/>
+			Sisow ecare is een betaalmogelijkheid waarbij niet direct betaald hoeft te worden. 
+			De betalingstermijn is 14 dagen en de factuur zal worden verzonden met de verzending. 
+			Om te betalen met Sisow ecare (factuur) moet u minimaal 18 jaar oud zijn. 
+			Er wordt een credit check uitgevoerd op het moment van aankoop.<br/>
+			<br/><a href="http://www.sisow.nl/downloads/Betalingsvoorwaarden_ecare.pdf">Sisow ecare betalingsvoorwaarden</a><br/>
+<?php
+if ($fee > 0) {
+?>
+			<br/>De extra kosten hiervoor bedragen <?php echo Mage::app()->getStore()->convertPrice($fee, true, true); ?> exclusief BTW.<br/>
+<?php
+}
+?>
+			<br/><b>Let op: verwerking/acceptatie kan tot 30 seconden duren.</b>
+			<br/>
+			<br/>
+			<label class="required" for="sisow_gender">Aanhef&nbsp;<span class="required">*</span></label>
+			<div class="input-box">
+				<select id="sisow_gender" class="input-text required-entry" title="Aanhef" name="payment[sisow_gender]">
+					<option value=""/>
+					<option value="F">Mevrouw</option>
+					<option value="M">De heer</option>
+				</select>
+			</div>
+			<br/>
+			<label class="required" for="sisow_initials">Voorletter(s)&nbsp;<span class="required">*</span></label>
+			<div class="input-box">
+				<input id="sisow_initials" class="input-text required-entry" maxlength="6" title="Voorletter(s)" value="<?php echo $firstletter; ?>" name="payment[sisow_initials]"/>
+			</div>
+			<br/>
+			<label class="required" for="sisow_month">Geboortedatum&nbsp;<span class="required">*</span></label>
+			<div class="input-box customer-dob sisow-dob">
+				<div class="dob-day">
+					<input id="sisow_day" class="input-text required-entry validate-custom" maxlength="2" type="text" title="Dag" value="" name="payment[sisow_day]">
+					<label for="sisow_day">DD</label>
+				</div>
+				<div class="dob-month">
+					<input id="sisow_month" class="input-text required-entry validate-custom" maxlength="2" type="text" title="Maand" value="" name="payment[sisow_month]">
+					<label for="sisow_month">MM</label>
+				</div>
+				<div class="dob-year">
+					<input id="sisow_year" class="input-text required-entry validate-custom" maxlength="4" type="text" title="Jaar" value="" name="payment[sisow_year]">
+					<label for="sisow_year">JJJJ</label>
+				</div>
+				<div class="dob-full" style="display:none;">
+					<input id="sisow_dob" type="hidden" name="payment[sisow_dob]">
+				</div>
+				<div class="validation-advice" style="display:none;"></div>
+			</div>
+			<script type="text/javascript">
+//<![CDATA[
+var customer_dob = new Varien.DOB('.sisow-dob', false, '%d-%m-%y');
+//]]>
+			</script>
+		</li>
+	</ul>

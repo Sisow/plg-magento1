@@ -1,0 +1,36 @@
+<?php 
+$_code = $this->getMethodCode(); 
+$_paymentfee = $this->getFee();
+$_description = $this->getInstructions();
+?>
+<script>
+var j = jQuery.noConflict();
+j(document).ready(function() {
+	j('#eps_widget').eps_widget({'return': 'bic'});
+});
+</script>
+<ul class="form-list" id="payment_form_<?php echo $_code ?>" style="display:none">
+	<li class="form-alt">	
+		<?php
+			if($_paymentfee['incl'] > 0)
+			{
+				echo '<b>'. $this->__(Mage::getStoreConfig('payment/'.$_code.'/payment_fee_label')) .' ' . Mage::app()->getStore()->convertPrice($_paymentfee['incl'], true, true).'</b>';
+			}
+		?>
+		
+		<?php 
+				if(!empty($_description))
+				{
+					echo '<p>' . $_description . '</p>';
+				}
+			?>
+		
+		
+		<img src="<?php print_r(Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'sisow' . DS . 'logo' . DS . 'sisow_eps' . '.' . 'png'); ?>" width="60px">
+		 
+		<label for="eps_widget">Bankleitzahl&nbsp;<span class="required"></span></label>
+		<div class="input-box">
+			<input id="eps_widget" autocomplete="off" name="payment[sisow_eps_bic]" class="input-text required-entry"/>
+		</div>
+    </li>
+</ul>

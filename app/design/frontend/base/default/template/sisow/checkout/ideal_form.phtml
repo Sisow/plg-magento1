@@ -1,0 +1,36 @@
+<?php 
+$_code = $this->getMethodCode(); 
+$_issuers = $this->getIssuers();
+$_choosenIssuer = $this->getInfoData('sisow_issuer');
+$_paymentfee = $this->getFee();
+$_description = $this->getInstructions();
+?>
+
+<ul class="form-list" id="payment_form_<?php echo $_code ?>" style="display:none">
+	<li>
+		<img src="<?php print_r(Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'sisow' . DS . 'logo' . DS . 'sisow_ideal' . '.' . 'png'); ?>">
+		<?php 
+				if(!empty($_description))
+				{
+					echo '<p>' . $_description . '</p>';
+				}
+			?>
+        <label for="<?php echo $_code ?>_issuer" class="required"><em>*</em><?php echo $this->__('Choose your bank'); ?>:</label>
+        <div class="input-box">
+            <select id="<?php echo $_code ?>_issuer" name="payment[sisow_issuer]" title="sisow_issuer" class="validate-select required-entry">
+                <option value=""><?php echo $this->__('Choose your bank'); ?>...</option>
+            
+            <?php foreach ($_issuers as $_k => $_v): ?>
+                <option value="<?php echo $_k ?>"<?php if($_k==$_choosenIssuer): ?> selected="selected"<?php endif ?>><?php echo $_v ?></option>
+            <?php endforeach ?>
+            </select>
+        </div>
+		
+		<?php
+			if($_paymentfee['incl'] > 0)
+			{
+				echo '<b>'. $this->__(Mage::getStoreConfig('payment/'.$_code.'/payment_fee_label')) .' ' . Mage::app()->getStore()->convertPrice($_paymentfee['incl'], true, true).'</b>';
+			}
+		?>
+    </li>
+</ul>

@@ -1,0 +1,15 @@
+<?php 
+$consumer = $this->_getAdditionalInfo();
+?>
+
+<?php echo '<b>Sisow ' . $this->escapeHtml($this->getMethod()->getTitle()) . '</b>'; ?>
+</br>
+<?php
+	if($consumer['consumerName'] != '')
+		echo '</br>Name: <b>' . $consumer['consumerName'] . '</b>';
+	if($consumer['consumerIban'] != '')
+		echo '</br>IBAN: <b>' . $consumer['consumerIban'] . '</b>';
+	if($consumer['consumerBic'] != '')
+		echo '</br>BIC: <b>' . $consumer['consumerBic'] . '</b>';
+?>
+</br>

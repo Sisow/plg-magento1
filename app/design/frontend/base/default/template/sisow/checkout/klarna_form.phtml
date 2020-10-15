@@ -1,0 +1,84 @@
+<?php 
+$paymentfee = $this->getFee();
+ 
+$fee = $paymentfee['incl'];
+$phone = $this->getPhone();
+$_code = $this->getMethodCode(); 
+$countryiso = $this->GetCountryIso();
+$_description = $this->getInstructions();
+
+$name = ($countryiso == "DE") ? "Klarna Rechnung" : "Klarna Factuur";
+?>
+
+	<ul class="form-list" id="payment_form_<?php echo $_code ?>" style="display:none">
+		<li class="form-alt">
+			<?php 
+			if($countryiso == "DE")
+				echo '<img src="https://cdn.klarna.com/public/images/DE/badges/v1/invoice/DE_invoice_badge_std_blue.png?width=125&eid='. Mage::getStoreConfig('payment/sisowpayments_klarna/klarnaeid').'" alt="Sisow Klarna" />';
+			else
+				echo '<img src="https://cdn.klarna.com/public/images/NL/badges/v1/invoice/NL_invoice_badge_std_blue.png?width=125&eid='. Mage::getStoreConfig('payment/sisowpayments_klarna/klarnaeid').'" alt="Sisow Klarna" />';
+			?>
+			<br/><?php echo $name; ?> - <?php echo $this->__('Payment within 14 days'); ?>.
+			<br/>
+			<a target="_blank" href="https://online.klarna.com/villkor_nl.yaws?eid=<?php echo Mage::getStoreConfig('payment/sisowpayments_klarna/klarnaeid'); ?>&charge=<?php echo $fee; ?>"><?php echo $this->__('Klarna Invoice Terms and Conditions'); ?></a>
+			<br/>
+			<?php
+			if ($fee > 0) {
+			?>
+				<br/><?php echo $this->__('The extra costs are'); ?> <?php echo Mage::app()->getStore()->convertPrice($fee, true, true); ?>.<br/>
+			<?php
+			}
+			?>
+			
+			<?php 
+				if(!empty($_description))
+				{
+					echo '<p>' . $_description . '</p>';
+				}
+			?>
+			
+			<!--<br/><b>Let op: verwerking/acceptatie kan tot 30 seconden duren.</b>
+			<br/>-->
+			<br/>
+			<label for="sisow_gender"><?php echo $this->__('Salutation'); ?>&nbsp;<span class="required"></span></label>
+			<div class="input-box">
+				<select id="sisow_gender" class="input-text required-entry" title="Aanhef" name="payment[sisow_gender]">
+					<option value=""><?php echo $this->__('--Please Select--') ?></option>
+					<option value="F"><?php echo $this->__('Female');?></option>
+					<option value="M"><?php echo $this->__('Male');?></option>
+				</select>
+			</div>
+			<br/>
+			<label for="sisow_phone"><?php echo $this->__('Telephone Number');?>&nbsp;<span class="required"></span></label>
+			<div class="input-box">
+				<input id="sisow_phone" class="input-text required-entry" maxlength="12" title="Telefoonnummer" value="<?php echo $phone; ?>" name="payment[sisow_phone]"/>
+			</div>
+			<br/>
+			<label for="sisow_day"><?php echo $this->__('Date of birth');?>&nbsp;<span class="required"></span></label></br>
+			<div class="select">
+					<select id="sisow_day" name="payment[sisow_day]" title="sisow_day" class="year required-entry">
+						<option value=""><?php echo $this->__('Day');?></option>
+						<?php foreach($this->getDates() as $k=>$v){?>
+							<option value="<?php echo $k;?>"><?php echo $v;?></option><?php } ?>
+					<select>
+					<select id="sisow_month" name="payment[sisow_month]" title="sisow_day" class="year required-entry">
+						<option value=""><?php echo $this->__('Month');?></option>
+						<?php foreach($this->getMonths() as $k=>$v){?>
+							<option value="<?php echo $k;?>"><?php echo $v;?></option><?php } ?>
+					<select>
+					<select id="sisow_year" name="payment[sisow_year]" title="sisow_year" class="year required-entry">
+						<option value=""><?php echo $this->__('Year');?></option>
+						<?php foreach($this->getYears() as $k=>$v){?>
+							<option value="<?php echo $k;?>"><?php echo $v;?></option><?php } ?>
+					<select>
+			</div>
+			<br/>
+			<?php if($countryiso == "DE")
+					echo '<input type="checkbox" name="accept" value="termsde" class="required-entry"><a href="https://cdn.klarna.com/1.0/shared/content/legal/terms/256/de_de/consent" target="_blank">Einwilligung<a/><br/>';
+					?>
+					<br/>
+			<div style="text-align: right; width: 100%;">
+				<a target="_blank" href="https://www.sisow.nl"><img src="https://www.sisow.nl/images/betaallogos/logo_sisow_klein.png" alt="Powered by Sisow" width="100px"/></a>
+			</div>
+		</li>
+	</ul>

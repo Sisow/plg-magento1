@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+	<STORE_default>
+		<reference name="head">
+		   <block type="core/text" name="sisow.giropay">
+			  <action method="setText">
+				<text>
+				   <![CDATA[<link type="text/css" rel="stylesheet" href="https://bankauswahl.giropay.de/widget/v1/style.css" media="all" />]]>
+				   <![CDATA[<link type="text/css" rel="stylesheet" href="https://bankauswahl.giropay.de/eps/widget/v1/style.css" media="all" />]]>
+				   <![CDATA[<script src="https://www.sisow.nl/Sisow/scripts/giro-eps.js"></script>]]>
+				</text>
+			  </action>
+		   </block>
+		</reference>
+	</STORE_default>
+</layout>

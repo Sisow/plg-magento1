@@ -1,0 +1,29 @@
+<?php 
+$_code = $this->getMethodCode(); 
+$_paymentfee = $this->getFee();
+?>
+<script>
+( function($) {
+        // we can now rely on $ within the safety of our "bodyguard" function
+        $(document).ready(function() {
+			$('#giropay_widget').giropay_widget({'return': 'bic','kind': 1});
+});
+    } ) ( jQuery );
+	
+</script>
+<ul class="form-list" id="payment_form_<?php echo $_code ?>" style="display:none">
+	<li class="form-alt">
+		<?php
+			if($_paymentfee['incl'] > 0)
+			{
+				echo '<b>'. $this->__(Mage::getStoreConfig('payment/'.$_code.'/payment_fee_label')) .' ' . Mage::app()->getStore()->convertPrice($_paymentfee['incl'], true, true).'</b>';
+			}
+		?>
+		<img src="<?php print_r(Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'sisow' . DS . 'logo' . DS . 'sisow_giropay' . '.' . 'png'); ?>" width="60px">
+		 
+		<label for="giropay_widget">Bankleitzahl&nbsp;<span class="required"></span></label>
+		<div class="input-box">
+			<input id="giropay_widget" autocomplete="off" name="payment[sisow_giropay_bic]" class="input-text required-entry" />
+		</div>
+    </li>
+</ul>

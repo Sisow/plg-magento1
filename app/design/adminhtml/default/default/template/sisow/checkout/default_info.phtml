@@ -1,0 +1,17 @@
+<?php 
+$consumer = $this->_getAdditionalInfo();
+?>
+
+<?php echo '<b>Sisow: ' . $this->escapeHtml($this->getMethod()->getTitle()) . '</b>'; ?>
+</br>
+<?php
+	if(array_key_exists("trxId", $consumer) && $consumer['trxId'] != '')
+		echo '</br>Transaction ID: <b>' . $consumer['trxId'] . '</b>';
+	if(array_key_exists("consumerName", $consumer) && $consumer['consumerName'] != '')
+		echo '</br>Name: <b>' . $consumer['consumerName'] . '</b>';
+	if(array_key_exists("consumerIban", $consumer) && $consumer['consumerIban'] != '')
+		echo '</br>IBAN: <b>' . $consumer['consumerIban'] . '</b>';
+	if(array_key_exists("consumerBic", $consumer) && $consumer['consumerBic'] != '')
+		echo '</br>BIC: <b>' . $consumer['consumerBic'] . '</b>';
+?>
+</br>

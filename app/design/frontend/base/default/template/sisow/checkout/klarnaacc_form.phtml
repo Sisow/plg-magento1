@@ -1,0 +1,94 @@
+<?php 
+$paymentfee = $this->getFee();
+ 
+$fee = $paymentfee['incl'];
+$phone = $this->getPhone();
+$_code = $this->getMethodCode(); 
+$monthly = $this->getMonthly();
+$pclass = $this->getPclass();
+$countryiso = $this->GetCountryIso();
+$_description = $this->getInstructions();
+
+$name = ($countryiso == "DE") ? "Klarna Ratenkauf" : "Klarna Account";
+?>
+
+	<ul class="form-list" id="payment_form_<?php echo $_code ?>" style="display:none">
+		<li class="form-alt">
+			<?php
+			if($countryiso == "DE")
+				echo '<img src="https://cdn.klarna.com/public/images/DE/badges/v1/account/DE_account_badge_std_blue.png?width=125&eid='. Mage::getStoreConfig('payment/sisowpayments_klarnaacc/klarnaeid').'"/><br/>';
+			else
+				echo '<img src="https://cdn.klarna.com/public/images/NL/badges/v1/account/NL_account_badge_std_blue.png?width=125&eid='. Mage::getStoreConfig('payment/sisowpayments_klarnaacc/klarnaeid').'"/><br/>';
+			?>
+			<?php 
+				if(!empty($_description))
+				{
+					echo '<p>' . $_description . '</p>';
+				}
+			?>
+			<?php echo $name; ?> - &euro; <?php echo round($monthly / 100.0, 2); ?> / <?php echo $this->__('Month');?>
+			<br/>
+			<?php
+			if($countryiso == "DE")
+				echo '<a target="_blank" href="https://online.klarna.com/account_de.yaws?eid='. Mage::getStoreConfig('payment/sisowpayments_klarnaacc/klarnaeid').'">'. $this->__('Read more').'!</a><br/>';
+			else
+				echo '<a target="_blank" href="https://online.klarna.com/account_nl.yaws?eid='. Mage::getStoreConfig('payment/sisowpayments_klarnaacc/klarnaeid').'">'. $this->__('Read more').'!</a><br/>';
+			?>
+			<?php
+			if($countryiso == "NL")
+				echo '<img src="https://www.sisow.nl/images/betaallogos/lenenkostgeld.jpg" alt="Let op! Geld lenen kost geld" /><br/>';
+			?>
+<?php
+if ($fee > 0) {
+?>
+			<br/><?php echo $this->__('The extra costs are '); ?><?php echo Mage::app()->getStore()->convertPrice($fee, true, true); ?>.<br/>
+<?php
+}
+?>
+			<!--<br/><b>Let op: verwerking/acceptatie kan tot 30 seconden duren.</b>
+			<br/>-->
+			<br/>
+			<label for="sisow_gender"><?php echo $this->__('Salutation'); ?>&nbsp;<span class="required"></span></label>
+			<div class="input-box">
+				<select id="sisow_gender" class="input-text required-entry" title="Aanhef" name="payment[sisow_gender]">
+					<option value=""><?php echo $this->__('--Please Select--') ?></option>
+					<option value="F"><?php echo $this->__('Female');?></option>
+					<option value="M"><?php echo $this->__('Male');?></option>
+				</select>
+			</div>
+			<br/>
+			<label for="sisow_phone"><?php echo $this->__('Telephone Number');?>&nbsp;<span class="required"></span></label>
+			<div class="input-box">
+				<input id="sisow_phone" class="input-text required-entry" maxlength="12" title="Telefoonnummer" value="<?php echo $phone; ?>" name="payment[sisow_phone]"/>
+			</div>
+			<br/>
+			<label for="sisow_day"><?php echo $this->__('Date of birth');?>&nbsp;<span class="required"></span></label></br>
+			<div class="select">
+					<select id="sisow_day" name="payment[sisow_day]" title="sisow_day" class="year required-entry">
+						<option value=""><?php echo $this->__('Day');?></option>
+						<?php foreach($this->getDates() as $k=>$v){?>
+							<option value="<?php echo $k;?>"><?php echo $v;?></option><?php } ?>
+					<select>
+					<select id="sisow_month" name="payment[sisow_month]" title="sisow_day" class="year required-entry">
+						<option value=""><?php echo $this->__('Month');?></option>
+						<?php foreach($this->getMonths() as $k=>$v){?>
+							<option value="<?php echo $k;?>"><?php echo $v;?></option><?php } ?>
+					<select>
+					<select id="sisow_year" name="payment[sisow_year]" title="sisow_year" class="year required-entry">
+						<option value=""><?php echo $this->__('Year');?></option>
+						<?php foreach($this->getYears() as $k=>$v){?>
+							<option value="<?php echo $k;?>"><?php echo $v;?></option><?php } ?>
+					<select>
+			</div>
+			<br/>
+			<?php if($countryiso == "DE")
+				echo '<input type="checkbox" name="acceptacc" value="termsdeacc" class="required-entry"><a href="https://cdn.klarna.com/1.0/shared/content/legal/terms/256/de_de/consent" target="_blank">Einwilligung<a/><br/>';
+			?>
+			<br/>
+			<div style="text-align: right; width: 100%;">
+				<a target="_blank" href="https://www.sisow.nl"><img src="https://www.sisow.nl/images/betaallogos/logo_sisow_klein.png" alt="Powered by Sisow" width="100px"/></a>
+			</div>
+			<input type="hidden" id="sisow_monthly" name="payment[sisow_monthly]" value="<?php echo $monthly; ?>" />
+			<input type="hidden" id="sisow_pclass" name="payment[sisow_pclass]" value="<?php echo $pclass; ?>" />
+		</li>
+	</ul>
