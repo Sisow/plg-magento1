@@ -1,32 +1,60 @@
-# Sisow Magento 1 Plug-in
 
-This plug-in will install all the Sisow payment methods to  your Magento installation. 
+# Buckaroo Magento Payments Plugin (former Sisow)
 
-For more information about the payment methods visit our website https://www.sisow.nl/betaalmethoden/ (Dutch) or https://www.sisow.nl/en/all-payment-methods-possible-at-sisow/ (English).
+> :warning: **PLEASE NOTE**: The Magento Payments Plugin (former Sisow) is DEPRECATED and will no longer be maintained.
 
-## Getting Started
-
-With the instructions below you can install our plug-in to your Magento 1.
-
-## Installation
-
+### Index
+- [About](#about)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Contribute](#contribute)
+- [Versioning](#versioning)
+- [Additional information](#additional-information)
 ---
-- Download the latest version from Github
-- Connect to your Magento with (s)FTP
-- Upload the files from Github to the root of your Magento installation
----
+
+### About
+
+Magento Open Source, previously Magento Community Edition, is an open-source eCommerce platform. Please note that Magento is currently end of life and Adobe only publishes updates for Magento 2 which is the successor (newer version).
+
+The Buckaroo Payments Plugin for Magento enables a ready-to-sell payment gateway. You can choose from popular online payment methods in The Netherlands, Belgium, France, Germany and globally. Start accepting payments within a few minutes.
+
+For more information about the former Sisow plugin and the migration, please visit:
+https://www.buckaroo.nl/sisow
+
+### Installation
+We recommend you to install the Buckaroo Magento Payments plugin (former Sisow) with composer. It is easy to install, update and maintain.
+
+-   Download the latest version from Github
+-   Connect to your Magento with (s)FTP
+-   Upload the files from Github to the root of your Magento installation
 
 ### Configuration
 
-Below you will find a quickstart for the configuration, for a full description please contact Sisow on support@sisow.nl.
-1. Log into the Magento Admin
-2. Go to *System* / *Configuration*
-3. Go to *Sales* / *Sisow*
-4. Enter under Sisow General Settings the Merchant ID and Merchant Key, these can be found in your Sisow portal --> https://www.sisow.nl/Sisow/Portal/Lgn.aspx
-5. Save the settings
-6. After this you can enable the Sisow payment method you like
-8. Save the settings
+Below you will find a quickstart for the configuration, for a full description please contact Buckaroo Technical Support on  [support@buckaroo.nl](mailto:support@buckaroo.nl).
 
-## Changelog
+1.  Log into the Magento Admin.
+2.  Go to  _Stores_  →  _Configuration_.
+3.  Go to  _Sales_  →  _Payment Methods_.
+4.  Scroll down to find the "Buckaroo" Settings.
+5.  Enter under General Settings the Merchant ID and Merchant Key, these can be found in the Buckaroo Plaza →  [https://plaza.buckaroo.nl](https://plaza.buckaroo.nl)
+6.  Save the settings.
+7.  After this you can enable the Buckaroo payment methods in the plugin. Please keep in mind that you can only enable payment methods with a active subscription within your Buckaroo account.
+8.  Save the settings.
 
-The changelog can be found [here](/CHANGELOG.md).
+### Contribute
+We really appreciate it when developers contribute to improve the Buckaroo plugins.
+If you want to contribute as well, then please follow our [Contribution Guidelines](CONTRIBUTING.md).
+
+### Versioning 
+<p align="left">
+  <img src="https://www.buckaroo.nl/media/3480/magento_versioning.png" width="500px" position="center">
+</p>
+
+- **MAJOR:** Breaking changes that require additional testing/caution.
+- **MINOR:** Changes that should not have a big impact.
+- **PATCHES:** Bug and hotfixes only.
+
+
+### Additional information
+- **Support:** https://support.buckaroo.eu/contact
+- **Contact:** [support@buckaroo.nl](mailto:support@buckaroo.nl) or [+31 (0)30 711 50 50](tel:+310307115050)
