@@ -1,3 +1,6 @@
+<p align="center">
+  <img src="https://www.buckaroo.nl/media/3598/sisow_magento1.png" width="200px" position="center">
+</p>
 
 # Buckaroo Magento Payments Plugin (former Sisow)
 
